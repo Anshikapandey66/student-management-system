@@ -29,6 +29,46 @@ def create_table():
     connection.close()
 
 
+def add_student(
+    name,
+    age,
+    course,
+    python_marks,
+    database_marks,
+    math_marks,
+    english_marks,
+    computer_marks
+):
+    connection = connect_database()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        INSERT INTO students (
+            name,
+            age,
+            course,
+            python_marks,
+            database_marks,
+            math_marks,
+            english_marks,
+            computer_marks
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        name,
+        age,
+        course,
+        python_marks,
+        database_marks,
+        math_marks,
+        english_marks,
+        computer_marks
+    ))
+
+    connection.commit()
+    connection.close()
+
+
 if __name__ == "__main__":
     create_table()
     print("Database created successfully!")
