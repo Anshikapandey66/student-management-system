@@ -69,6 +69,19 @@ def add_student(
     connection.close()
 
 
+def get_all_students():
+    connection = connect_database()
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM students")
+
+    students = cursor.fetchall()
+
+    connection.close()
+
+    return students
+
+
 if __name__ == "__main__":
     create_table()
     print("Database created successfully!")
