@@ -80,7 +80,21 @@ def get_all_students():
     connection.close()
 
     return students
+    
+def search_student(keyword):
+    connection = connect_database()
+    cursor = connection.cursor()
 
+    cursor.execute("""
+        SELECT * FROM students
+        WHERE name LIKE ? OR id = ?
+    """, (f"%{keyword}%", keyword))
+
+    students = cursor.fetchall()
+
+    connection.close()
+
+    return students
 
 if __name__ == "__main__":
     create_table()
